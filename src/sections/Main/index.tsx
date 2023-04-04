@@ -1,8 +1,20 @@
 import { Flex, Image, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import { IoStarSharp } from "react-icons/io5";
 import { BsFillHouseDoorFill } from "react-icons/bs";
 import { BsArrowRightCircle } from "react-icons/bs";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FaUmbrellaBeach } from "react-icons/fa";
+import { FaSwimmingPool } from "react-icons/fa";
+import { FiCoffee } from "react-icons/fi";
+import { SiLinuxcontainers } from "react-icons/si";
+import { AiOutlineFire } from "react-icons/ai";
+import { GiSailboat } from "react-icons/gi";
 
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, Navigation } from "swiper";
 const data = [
   {
     id: 1,
@@ -100,6 +112,7 @@ const optionsList = [
 ];
 
 export default () => {
+  const [swiperRef, setSwiperRef] = useState(null);
   return (
     <Flex
       flexWrap="wrap"
@@ -110,46 +123,102 @@ export default () => {
       justify="center"
     >
       <Flex align="center" w="100%" gap="20px" justify="center">
-        <Flex
-          _hover={{
-            transform: "scale(1.1)",
-            transition: "all 0.2s ease-in-out",
+        <Swiper
+          onSwiper={() => setSwiperRef}
+          slidesPerView={4}
+          spaceBetween={10}
+          pagination={{
+            type: "fraction",
           }}
+          navigation={true}
+          modules={[Navigation]}
+          className="mySwiper"
         >
-          <BsArrowRightCircle
-            cursor="pointer"
-            style={{ transform: "rotate(180deg)" }}
-            size="1.5em"
-          />
-        </Flex>
-        {optionsList.map((item) => (
-          <Flex
-            flexDir="column"
-            key={item.id}
-            h="fit-content"
-            cursor="pointer"
-            w="fit-content"
-            justify="center"
-            align="center"
-            borderRadius="15px"
-            px="5px"
-            py="6px"
-            gap="10px"
-          >
-            <BsFillHouseDoorFill color="#333" size="1em" />
-            <Text fontSize="sm" fontWeight="500">
-              {item.name}
-            </Text>
-          </Flex>
-        ))}
-        <Flex
-          _hover={{
-            transform: "scale(1.1)",
-            transition: "all 0.2s ease-in-out",
-          }}
-        >
-          <BsArrowRightCircle cursor="pointer" size="1.5em" />
-        </Flex>
+          <SwiperSlide>
+            <Flex
+              _hover={{
+                fontWeight: "bold",
+                transition: "all 0.2s ease-in-out",
+              }}
+              justify="center"
+              align="center"
+              flexDir="column"
+            >
+              <FaUmbrellaBeach />
+              <Text>Praia</Text>
+            </Flex>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Flex
+              _hover={{
+                fontWeight: "bold",
+                transition: "all 0.2s ease-in-out",
+              }}
+              justify="center"
+              align="center"
+              flexDir="column"
+            >
+              <FaSwimmingPool />
+              <Text>Piscina</Text>
+            </Flex>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Flex
+              _hover={{
+                fontWeight: "bold",
+                transition: "all 0.2s ease-in-out",
+              }}
+              justify="center"
+              align="center"
+              flexDir="column"
+            >
+              <FiCoffee />
+              <Text>Pousada</Text>
+            </Flex>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Flex
+              _hover={{
+                fontWeight: "bold",
+                transition: "all 0.2s ease-in-out",
+              }}
+              justify="center"
+              align="center"
+              flexDir="column"
+            >
+              <SiLinuxcontainers />
+              <Text>Containeres</Text>
+            </Flex>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Flex
+              _hover={{
+                fontWeight: "bold",
+                transition: "all 0.2s ease-in-out",
+              }}
+              justify="center"
+              align="center"
+              flexDir="column"
+            >
+              <AiOutlineFire />
+              <Text>Em alta</Text>
+            </Flex>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Flex
+              _hover={{
+                fontWeight: "bold",
+                transition: "all 0.2s ease-in-out",
+              }}
+              justify="center"
+              align="center"
+              flexDir="column"
+            >
+              <GiSailboat />
+              <Text>Barcos</Text>
+            </Flex>
+          </SwiperSlide>
+        </Swiper>
       </Flex>
       {data.map((item) => (
         <Flex h="fit-content" cursor="Pointer" flexDir="column">

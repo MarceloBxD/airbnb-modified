@@ -1,4 +1,11 @@
-import { Flex, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
 import { FaRegPaperPlane } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -36,6 +43,10 @@ export default () => {
         {dataList.map((item, index) => (
           <Flex key={index}>
             <Text
+              _hover={{
+                transform: "scale(1.05)",
+                transition: "all 0.2s ease-in-out",
+              }}
               borderRadius="6px"
               cursor="pointer"
               fontWeight="600"
@@ -57,23 +68,40 @@ export default () => {
           <BiSearchAlt color="#000" />
         </Flex>
       </Flex>
-      <Flex
-        _hover={{
-          cursor: "pointer",
-          boxShadow: "0px 0px 4px 0px #000",
-          transition: "all 0.3s ease",
-        }}
-        justify="space-between"
-        px="8px"
-        align="center"
-        w="70px"
-        border="2px solid #fff"
-        h="40px"
-        borderRadius="20px"
-      >
-        <RxHamburgerMenu size={"1.2em"} color="#fff" />
-        <FiUser size={"1.5em"} color="#FFF" />
-      </Flex>
+      <Menu>
+        <MenuButton>
+          <Flex
+            _hover={{
+              cursor: "pointer",
+              boxShadow: "0px 0px 4px 0px #000",
+              transition: "all 0.3s ease",
+            }}
+            justify="space-between"
+            px="8px"
+            align="center"
+            w="70px"
+            border="2px solid #fff"
+            h="40px"
+            borderRadius="20px"
+          >
+            <RxHamburgerMenu size={"1.2em"} color="#fff" />
+            <FiUser size={"1.5em"} color="#FFF" />
+          </Flex>
+        </MenuButton>
+        <MenuList zIndex={999}>
+          <Link to="/cadaster">
+            <MenuItem>Cadastre-se</MenuItem>
+          </Link>
+          <Link to="/login">
+            <MenuItem>Entrar</MenuItem>
+          </Link>
+          <Flex my="5px" w="100%" border="1px solid #ccc"></Flex>
+          <MenuItem>Anuncie seu espaço no Airbnb</MenuItem>
+          <MenuItem>Ofereça uma experiência</MenuItem>
+          <MenuItem>Ajuda</MenuItem>
+        </MenuList>
+      </Menu>
+      {/* </Link> */}
     </Flex>
   );
 };

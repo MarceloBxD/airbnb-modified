@@ -23,6 +23,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <Main />,
       },
+      {
+        path: "/login",
+        element: <FormLogin />,
+      },
+      {
+        path: "/cadaster",
+        element: <FormCadaster />,
+      },
     ],
   },
 ]);

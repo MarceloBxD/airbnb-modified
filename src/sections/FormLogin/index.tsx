@@ -1,7 +1,45 @@
 import { Flex, Input, Button, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export default () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  const handleLogin = async (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    try {
+      let res = await axios.post(
+        "http://localhost:3000/login",
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      console.log(res);
+
+      if (res) {
+        setError("");
+      }
+    } catch (err) {
+      // console.log(err.response.data);
+      if (err.response.data === "User not found") {
+        setError("Usuário não encontrado");
+      } else if (err.response.data === "Pass not ok") {
+        setError("Senha incorreta");
+      }
+    }
+  };
+
   return (
     <Flex
       justify="center"
@@ -10,17 +48,14 @@ export default () => {
       align="center"
       w="100%"
     >
-      <Text
-        color="red.600"
-        fontSize="2xl"
-        w="300px"
-        fontWeight="bold"
-        mb="10px"
-      >
+      <Text color="red" fontSize="2xl" w="300px" fontWeight="bold" mb="10px">
         Login
       </Text>
       <Flex gap="10px" flexDir="column">
         <Input
+          value={email}
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
           focusBorderColor="#EE4A44"
           variant="flushed"
           placeholder="Email"
@@ -28,13 +63,23 @@ export default () => {
           maxW="100%"
         />
         <Input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           focusBorderColor="#EE4A44"
           variant="flushed"
           placeholder="Password"
           w="300px"
           maxW="100%"
         />
-        <Button colorScheme="red" w="100%" variant="ghost" mt="10px">
+        {error && <Text color="red.600">{error}</Text>}
+        <Button
+          onClick={(e: any) => handleLogin(e)}
+          colorScheme="red"
+          w="100%"
+          variant="solid"
+          mt="10px"
+        >
           Fazer login
         </Button>
         <Flex gap="10px">
