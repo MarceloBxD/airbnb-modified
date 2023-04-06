@@ -220,8 +220,8 @@ export default () => {
           </SwiperSlide>
         </Swiper>
       </Flex>
-      {data.map((item) => (
-        <Flex h="fit-content" cursor="Pointer" flexDir="column">
+      {data.map((item, index) => (
+        <Flex key={index} h="fit-content" cursor="Pointer" flexDir="column">
           <Image
             objectFit="cover"
             backgroundPosition="center"

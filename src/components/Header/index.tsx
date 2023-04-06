@@ -11,10 +11,12 @@ import { FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearchAlt } from "react-icons/bi";
+import { useApp } from "../../contexts/contextApi";
 
 const dataList = ["Qualquer lugar", "Qualquer semana", "Hóspedes"];
 
 export default () => {
+  const { user }: any = useApp();
   return (
     <Flex
       justify="space-between"
@@ -77,8 +79,8 @@ export default () => {
               transition: "all 0.3s ease",
             }}
             justify="space-between"
-            px="8px"
             align="center"
+            px="8px"
             w="70px"
             border="2px solid #fff"
             h="40px"
@@ -86,6 +88,25 @@ export default () => {
           >
             <RxHamburgerMenu size={"1.2em"} color="#fff" />
             <FiUser size={"1.5em"} color="#FFF" />
+            {user && (
+              <Flex
+                w="25px"
+                h="25px"
+                bgColor="#000"
+                justify="center"
+                align="center"
+                borderRadius="50%"
+              >
+                <Text
+                  textAlign="center"
+                  fontSize="sm"
+                  fontWeight="600"
+                  color="#FFF"
+                >
+                  {user.name[0]}
+                </Text>
+              </Flex>
+            )}
           </Flex>
         </MenuButton>
         <MenuList zIndex={999}>

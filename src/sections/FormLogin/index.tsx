@@ -1,18 +1,22 @@
 import { Flex, Input, Button, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useApp } from "../../contexts/contextApi";
 
 export default () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [redirect, setRedirect] = useState<boolean>(false);
+
+  const { setUser, user }: any = useApp();
 
   const handleLogin = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     try {
-      let res = await axios.post(
+      const response = await axios.post(
         "http://localhost:3000/login",
         {
           email,
@@ -25,11 +29,11 @@ export default () => {
           },
         }
       );
-      console.log(res);
 
-      if (res) {
-        setError("");
-      }
+      alert("Loggin Successful");
+      setUser(response.data);
+      setRedirect(true);
+      setError("");
     } catch (err) {
       // console.log(err.response.data);
       if (err.response.data === "User not found") {
@@ -39,6 +43,10 @@ export default () => {
       }
     }
   };
+
+  if (redirect) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Flex

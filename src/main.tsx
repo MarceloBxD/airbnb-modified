@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import axios from "axios";
 
 import { ChakraProvider } from "@chakra-ui/react";
 
@@ -13,6 +14,7 @@ import {
 import FormLogin from "./sections/FormLogin";
 import FormCadaster from "./sections/FormCadaster";
 import Main from "./sections/Main";
+import { AppProvider } from "./contexts/contextApi";
 
 const router = createBrowserRouter([
   {
@@ -37,8 +39,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ChakraProvider>
-      <RouterProvider router={router} />
-    </ChakraProvider>
+    <AppProvider>
+      <ChakraProvider>
+        <RouterProvider router={router} />
+      </ChakraProvider>
+    </AppProvider>
   </React.StrictMode>
 );
