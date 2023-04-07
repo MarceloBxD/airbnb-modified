@@ -5,20 +5,21 @@ import React, {
   useState,
   useRef,
 } from "react";
-import axios from "axios";
 
 const AppContext = createContext({});
 
 export function AppProvider({ children }: any) {
   const [user, setUser] = useState<any>(null);
+  const [searchArea, setSearchArea] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (!user) {
-      axios.get("http://localhost:3000/profile");
-    }
-  }, []);
+  // Anotação: Levar usuário para outra página quando clicar no anúncio 
 
-  const value = { user, setUser };
+  const value = {
+    user,
+    setUser,
+    searchArea,
+    setSearchArea,
+  };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

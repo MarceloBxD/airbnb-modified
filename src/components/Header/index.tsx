@@ -1,5 +1,6 @@
 import {
   Flex,
+  Input,
   Menu,
   MenuButton,
   MenuItem,
@@ -16,7 +17,7 @@ import { useApp } from "../../contexts/contextApi";
 const dataList = ["Qualquer lugar", "Qualquer semana", "Hóspedes"];
 
 export default () => {
-  const { user }: any = useApp();
+  const { setSearchArea, searchArea, user }: any = useApp();
   return (
     <Flex
       justify="space-between"
@@ -42,23 +43,34 @@ export default () => {
         color="#FFF"
         gap="30px"
       >
-        {dataList.map((item, index) => (
-          <Flex key={index}>
-            <Text
-              _hover={{
-                transform: "scale(1.05)",
-                transition: "all 0.2s ease-in-out",
-              }}
-              borderRadius="6px"
-              cursor="pointer"
-              fontWeight="600"
-              fontSize="md"
-              p="3px"
-            >
-              {item}
-            </Text>
-          </Flex>
-        ))}
+        {!searchArea &&
+          dataList.map((item, index) => (
+            <Flex key={index}>
+              <Text
+                _hover={{
+                  transform: "scale(1.05)",
+                  transition: "all 0.2s ease-in-out",
+                }}
+                borderRadius="6px"
+                cursor="pointer"
+                fontWeight="600"
+                fontSize="md"
+                p="3px"
+              >
+                {item}
+              </Text>
+            </Flex>
+          ))}
+        {searchArea && (
+          <Input
+            placeholder="Onde você quer ir?"
+            _placeholder={{ color: "#ccc" }}
+            onBlur={() => setSearchArea(false)}
+            variant="unstyled"
+            w="100%"
+          />
+        )}
+
         <Flex
           align="center"
           bgColor="#fff"
@@ -66,6 +78,7 @@ export default () => {
           w="40px"
           cursor="pointer"
           justify="center"
+          onClick={() => setSearchArea(true)}
         >
           <BiSearchAlt color="#000" />
         </Flex>
@@ -88,35 +101,20 @@ export default () => {
           >
             <RxHamburgerMenu size={"1.2em"} color="#fff" />
             <FiUser size={"1.5em"} color="#FFF" />
-            {user && (
-              <Flex
-                w="25px"
-                h="25px"
-                bgColor="#000"
-                justify="center"
-                align="center"
-                borderRadius="50%"
-              >
-                <Text
-                  textAlign="center"
-                  fontSize="sm"
-                  fontWeight="600"
-                  color="#FFF"
-                >
-                  {user.name[0]}
-                </Text>
-              </Flex>
-            )}
           </Flex>
         </MenuButton>
         <MenuList zIndex={999}>
-          <Link to="/cadaster">
-            <MenuItem>Cadastre-se</MenuItem>
-          </Link>
-          <Link to="/login">
-            <MenuItem>Entrar</MenuItem>
-          </Link>
-          <Flex my="5px" w="100%" border="1px solid #ccc"></Flex>
+          {!user && (
+            <>
+              <Link to="/cadaster">
+                <MenuItem>Cadastre-se</MenuItem>
+              </Link>
+              <Link to="/login">
+                <MenuItem>Entrar</MenuItem>
+              </Link>
+              <Flex my="5px" w="100%" border="1px solid #ccc"></Flex>
+            </>
+          )}
           <MenuItem>Anuncie seu espaço no Airbnb</MenuItem>
           <MenuItem>Ofereça uma experiência</MenuItem>
           <MenuItem>Ajuda</MenuItem>

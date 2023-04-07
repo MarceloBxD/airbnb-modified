@@ -10,7 +10,7 @@ export default () => {
   const [error, setError] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false);
 
-  const { setUser, user }: any = useApp();
+  const { setUser }: any = useApp();
 
   const handleLogin = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -29,8 +29,6 @@ export default () => {
           },
         }
       );
-
-      alert("Loggin Successful");
       setUser(response.data);
       setRedirect(true);
       setError("");

@@ -15,6 +15,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
+import { useApp } from "../../contexts/contextApi";
+
 const data = [
   {
     id: 1,
@@ -70,6 +72,60 @@ const data = [
     stars: "4.5",
     price: "R$ 1.000,00 /noite",
   },
+  {
+    id: 8,
+    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    location: "Paraty, RJ",
+    name: "Casa Black Power",
+    description: "Acomoda 4 pessoas",
+    price: "R$ 1.000,00 /noite",
+    stars: "4.5",
+  },
+  {
+    id: 9,
+    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    location: "Paraty, RJ",
+    name: "Casa Armandi Lombardi",
+    description: "Acomoda 4 pessoas",
+    stars: "4.5",
+    price: "R$ 1.000,00 /noite",
+  },
+  {
+    id: 10,
+    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    location: "Búzios, RJ",
+    name: "Casa inteira",
+    description: "Acomoda 4 pessoas",
+    stars: "4.5",
+    price: "R$ 1.000,00 /noite",
+  },
+  {
+    id: 11,
+    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    location: "Búzios, RJ",
+    name: "Casa inteira",
+    description: "Acomoda 4 pessoas",
+    stars: "4.5",
+    price: "R$ 1.000,00 /noite",
+  },
+  {
+    id: 12,
+    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    location: "Búzios, RJ",
+    name: "Casa inteira",
+    description: "Acomoda 4 pessoas",
+    stars: "4.5",
+    price: "R$ 1.000,00 /noite",
+  },
+  {
+    id: 13,
+    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    location: "Búzios, RJ",
+    name: "Casa inteira",
+    description: "Acomoda 4 pessoas",
+    stars: "4.5",
+    price: "R$ 1.000,00 /noite",
+  },
 ];
 
 const optionsList = [
@@ -113,6 +169,7 @@ const optionsList = [
 
 export default () => {
   const [swiperRef, setSwiperRef] = useState(null);
+  const { openDetails, setOpenDetails }: any = useApp();
   return (
     <Flex
       flexWrap="wrap"
@@ -221,7 +278,13 @@ export default () => {
         </Swiper>
       </Flex>
       {data.map((item, index) => (
-        <Flex key={index} h="fit-content" cursor="Pointer" flexDir="column">
+        <Flex
+          onClick={() => setOpenDetails(true)}
+          key={index}
+          h="fit-content"
+          cursor="Pointer"
+          flexDir="column"
+        >
           <Image
             objectFit="cover"
             backgroundPosition="center"
