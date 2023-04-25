@@ -1,5 +1,5 @@
 import { Flex, Text, Select } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useApp } from "../../contexts/contextApi";
 
@@ -7,37 +7,43 @@ export default () => {
   const [choose, setChoose] = useState<string>("");
   const { setData }: any = useApp();
 
-  if (choose === "A-Z") {
-    try {
-      const getDatainOrder = async () => {
-        const res = await axios.get("http://localhost:3000/ordem-alfabetica");
-        setData(res.data);
-      };
-      getDatainOrder();
-    } catch (err) {
-      console.log(err);
+  useEffect(() => {
+    if (choose === "A-Z") {
+      try {
+        const getDatainOrder = async () => {
+          const res = await axios.get("http://localhost:3000/ordem-alfabetica");
+          setData(res.data);
+        };
+        getDatainOrder();
+      } catch (err) {
+        console.log(err);
+      }
+    } else if (choose === "menor preço") {
+      try {
+        const getByLowerPrice = async () => {
+          const res = await axios.get(
+            "http://localhost:3000/ordem-menor-preco"
+          );
+          setData(res.data);
+        };
+        getByLowerPrice();
+      } catch (err) {
+        console.log(err);
+      }
+    } else if (choose === "maior preço") {
+      try {
+        const getByHigherPrice = async () => {
+          const res = await axios.get(
+            "http://localhost:3000/ordem-maior-preco"
+          );
+          setData(res.data);
+        };
+        getByHigherPrice();
+      } catch (err) {
+        console.log(err);
+      }
     }
-  } else if (choose === "menor preço") {
-    try {
-      const getByLowerPrice = async () => {
-        const res = await axios.get("http://localhost:3000/ordem-menor-preco");
-        setData(res.data);
-      };
-      getByLowerPrice();
-    } catch (err) {
-      console.log(err);
-    }
-  } else if (choose === "maior preço") {
-    try {
-      const getByHigherPrice = async () => {
-        const res = await axios.get("http://localhost:3000/ordem-maior-preco");
-        setData(res.data);
-      };
-      getByHigherPrice();
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  }, [choose]);
 
   return (
     <Flex

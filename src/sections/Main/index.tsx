@@ -58,24 +58,11 @@ const optionsList = [
 export default () => {
   const [swiperRef, setSwiperRef] = useState(null);
   const navigate = useNavigate();
-  const { data, setData }: any = useApp();
+  const { data, setData, getData }: any = useApp();
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await axios.get("http://localhost:3000/places", {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      });
-      setData(response.data);
-    };
     getData();
   }, []);
-
-  // const goToDetails = (id: number) => {
-  //   return navigate(`details/${id}`);
-  // };
 
   return (
     <Flex
@@ -186,7 +173,7 @@ export default () => {
       </Flex>
 
       <Flex maxW="1200px" m="0 auto" flexWrap="wrap">
-        {data.map((item) => (
+        {data.map((item: any) => (
           <Flex
             w="33.33%"
             onClick={() => console.log(item.placeid)}

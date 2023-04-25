@@ -39,10 +39,6 @@ const router = createBrowserRouter([
         path: "/place-add",
         element: <PlaceAdd />,
       },
-      // {
-      //   path: "/details/:addId",
-      //   element: <MoreDetails />,
-      // },
     ],
   },
 ]);

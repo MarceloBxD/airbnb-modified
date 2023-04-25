@@ -14,9 +14,9 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearchAlt } from "react-icons/bi";
 import { useApp } from "../../contexts/contextApi";
 import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-const dataList = ["Qualquer lugar", "Qualquer semana", "Hóspedes"];
+import axios from "axios";
 
 const handleLogout = () => {
   Cookies.remove("user");
@@ -26,6 +26,25 @@ const handleLogout = () => {
 export default () => {
   const navigate = useNavigate();
   const { setSearchArea, searchArea, user }: any = useApp();
+  const [name, setName] = useState<string>("");
+  const { setData, getData }: any = useApp();
+
+  const searchData = async (name: string) => {
+    const response = await axios.post(
+      `http://localhost:3000/place`,
+      {
+        name,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
+    setData(response.data.place);
+  };
+
   return (
     <Flex
       justify="space-between"
@@ -44,32 +63,35 @@ export default () => {
         </Flex>
       </Link>
       <Flex
-        p="6px"
+        p="8px"
         borderRadius="15px"
         border="1px solid #fff"
         color="#FFF"
         gap="30px"
       >
-        {!searchArea &&
-          dataList.map((item, index) => (
-            <Flex key={index}>
-              <Text
-                _hover={{
-                  transform: "scale(1.05)",
-                  transition: "all 0.2s ease-in-out",
-                }}
-                borderRadius="6px"
-                cursor="pointer"
-                fontWeight="600"
-                fontSize="md"
-                p="3px"
-              >
-                {item}
-              </Text>
-            </Flex>
-          ))}
+        {!searchArea && (
+          <Flex gap="10px">
+            <Text
+              _hover={{ transform: "scale(1.05)" }}
+              cursor="pointer"
+              fontWeight="500"
+              onClick={() => getData()}
+            >
+              Qualquer lugar
+            </Text>
+            <Text fontWeight="500">Praia</Text>
+            <Text fontWeight="500">Lugar</Text>
+          </Flex>
+        )}
         {searchArea && (
           <Input
+            value={name}
+            onChange={(e: any) => setName(e.target.value)}
+            onKeyDown={(e: any) => {
+              if (e.key == "Enter") {
+                searchData(name);
+              }
+            }}
             placeholder="Onde você quer ir?"
             _placeholder={{ color: "#ccc" }}
             onBlur={() => setSearchArea(false)}
