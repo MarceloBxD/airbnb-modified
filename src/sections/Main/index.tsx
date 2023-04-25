@@ -1,132 +1,20 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { useEffect, useState } from "react";
+import { Flex, Select, Image, Text } from "@chakra-ui/react";
 import { IoStarSharp } from "react-icons/io5";
-import { BsFillHouseDoorFill } from "react-icons/bs";
-import { BsArrowRightCircle } from "react-icons/bs";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FaUmbrellaBeach } from "react-icons/fa";
-import { FaSwimmingPool } from "react-icons/fa";
+import { FaUmbrellaBeach, FaSwimmingPool } from "react-icons/fa";
 import { FiCoffee } from "react-icons/fi";
 import { SiLinuxcontainers } from "react-icons/si";
 import { AiOutlineFire } from "react-icons/ai";
 import { GiSailboat } from "react-icons/gi";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper";
+import { useNavigate } from "react-router-dom";
+import { Navigation } from "swiper";
 import { useApp } from "../../contexts/contextApi";
-
-const data = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Paraty, RJ",
-    name: "Casa Black Power",
-    description: "Acomoda 4 pessoas",
-    price: "R$ 1.000,00 /noite",
-    stars: "4.5",
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Paraty, RJ",
-    name: "Casa Armandi Lombardi",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Búzios, RJ",
-    name: "Casa inteira",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Búzios, RJ",
-    name: "Casa inteira",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Búzios, RJ",
-    name: "Casa inteira",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Búzios, RJ",
-    name: "Casa inteira",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-  {
-    id: 8,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Paraty, RJ",
-    name: "Casa Black Power",
-    description: "Acomoda 4 pessoas",
-    price: "R$ 1.000,00 /noite",
-    stars: "4.5",
-  },
-  {
-    id: 9,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Paraty, RJ",
-    name: "Casa Armandi Lombardi",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-  {
-    id: 10,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Búzios, RJ",
-    name: "Casa inteira",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-  {
-    id: 11,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Búzios, RJ",
-    name: "Casa inteira",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-  {
-    id: 12,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Búzios, RJ",
-    name: "Casa inteira",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-  {
-    id: 13,
-    src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FzYXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    location: "Búzios, RJ",
-    name: "Casa inteira",
-    description: "Acomoda 4 pessoas",
-    stars: "4.5",
-    price: "R$ 1.000,00 /noite",
-  },
-];
+import axios from "axios";
+import FooterSearch from "../../components/FooterSearch";
 
 const optionsList = [
   {
@@ -169,7 +57,26 @@ const optionsList = [
 
 export default () => {
   const [swiperRef, setSwiperRef] = useState(null);
-  const { openDetails, setOpenDetails }: any = useApp();
+  const navigate = useNavigate();
+  const { data, setData }: any = useApp();
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get("http://localhost:3000/places", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+      setData(response.data);
+    };
+    getData();
+  }, []);
+
+  // const goToDetails = (id: number) => {
+  //   return navigate(`details/${id}`);
+  // };
+
   return (
     <Flex
       flexWrap="wrap"
@@ -277,45 +184,49 @@ export default () => {
           </SwiperSlide>
         </Swiper>
       </Flex>
-      {data.map((item, index) => (
-        <Flex
-          onClick={() => setOpenDetails(true)}
-          key={index}
-          h="fit-content"
-          cursor="Pointer"
-          flexDir="column"
-        >
-          <Image
-            objectFit="cover"
-            backgroundPosition="center"
-            backgroundSize="cover"
-            w="360px"
-            h="340px"
-            borderRadius="15px"
-            src={item.src}
-            alt="image"
-          />
-          <Flex justify="space-between">
-            <Flex flexDir="column">
-              <Text fontWeight="bold">{item.name}</Text>
-              <Text>{item.description}</Text>
-              <Text color="#000" fontWeight="600">
-                {item.price}
-              </Text>
-              <Text color="#aaa">{item.location}</Text>
-            </Flex>
-            <Flex gap="4px" h="fit-content" align="center">
-              <Text align="center">{item.stars}</Text>
-              <IoStarSharp
-                style={{
-                  alignSelf: "center",
-                  justifyContent: "center",
-                }}
-              />
+
+      <Flex maxW="1200px" m="0 auto" flexWrap="wrap">
+        {data.map((item) => (
+          <Flex
+            w="33.33%"
+            onClick={() => console.log(item.placeid)}
+            key={item.placeid}
+            cursor="Pointer"
+            flexDir="column"
+            p="5px 10px"
+          >
+            <Image
+              objectFit="cover"
+              backgroundPosition="center"
+              backgroundSize="cover"
+              w="360px"
+              h="340px"
+              borderRadius="15px"
+              alt="image"
+            />
+            <Flex justify="space-between">
+              <Flex flexDir="column">
+                <Text fontWeight="bold">{item.name}</Text>
+                <Text>{item.description}</Text>
+                <Text color="#000" fontWeight="600">
+                  R$ {item.price},00 /noite
+                </Text>
+                <Text color="#aaa">{item.location}</Text>
+              </Flex>
+              <Flex gap="4px" h="fit-content" align="center">
+                <Text align="center">{item.stars}</Text>
+                <IoStarSharp
+                  style={{
+                    alignSelf: "center",
+                    justifyContent: "center",
+                  }}
+                />
+              </Flex>
             </Flex>
           </Flex>
-        </Flex>
-      ))}
+        ))}
+      </Flex>
+      <FooterSearch />
     </Flex>
   );
 };

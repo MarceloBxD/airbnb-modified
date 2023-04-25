@@ -1,6 +1,8 @@
 import { Flex, Input, Button, Text, useToast } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useApp } from "../../contexts/contextApi";
+
 import axios from "axios";
 
 export default () => {
@@ -8,6 +10,8 @@ export default () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { setError, error }: any = useApp();
 
   const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -28,8 +32,6 @@ export default () => {
         }
       );
 
-      console.log(response);
-
       if (response) {
         toast({
           title: "Cadastro realizado com sucesso!",
@@ -38,9 +40,10 @@ export default () => {
           duration: 9000,
           isClosable: true,
         });
+        setError("");
       }
     } catch (err) {
-      console.log(err);
+      setError(err.response.data.message);
     }
   };
 
@@ -93,6 +96,11 @@ export default () => {
         >
           Cadastre-se
         </Button>
+        {error && (
+          <Text color="red" fontSize="sm">
+            {error}
+          </Text>
+        )}
         <Flex gap="10px">
           <Text>Já possui uma conta?</Text>
           <Link to="/login">

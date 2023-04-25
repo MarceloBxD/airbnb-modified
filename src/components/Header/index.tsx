@@ -13,10 +13,18 @@ import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearchAlt } from "react-icons/bi";
 import { useApp } from "../../contexts/contextApi";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const dataList = ["Qualquer lugar", "Qualquer semana", "Hóspedes"];
 
+const handleLogout = () => {
+  Cookies.remove("user");
+  window.location.href = "/";
+};
+
 export default () => {
+  const navigate = useNavigate();
   const { setSearchArea, searchArea, user }: any = useApp();
   return (
     <Flex
@@ -25,7 +33,6 @@ export default () => {
       w="100%"
       px="20px"
       py="10px"
-      h="fit-content"
       bgColor="#EE4A44"
     >
       <Link to="/">
@@ -94,13 +101,27 @@ export default () => {
             justify="space-between"
             align="center"
             px="8px"
-            w="70px"
+            gap="5px"
+            w="fit-content"
             border="2px solid #fff"
             h="40px"
             borderRadius="20px"
           >
             <RxHamburgerMenu size={"1.2em"} color="#fff" />
-            <FiUser size={"1.5em"} color="#FFF" />
+            {user ? (
+              <Flex
+                w="25px"
+                h="25px"
+                align="center"
+                bgColor="#000"
+                justify="center"
+                rounded="full"
+              >
+                <Text color="#fff">{user.name[0]}</Text>
+              </Flex>
+            ) : (
+              <FiUser size={"1.5em"} color="#FFF" />
+            )}
           </Flex>
         </MenuButton>
         <MenuList zIndex={999}>
@@ -115,9 +136,12 @@ export default () => {
               <Flex my="5px" w="100%" border="1px solid #ccc"></Flex>
             </>
           )}
-          <MenuItem>Anuncie seu espaço no Airbnb</MenuItem>
+          <MenuItem onClick={() => navigate("/place-add")}>
+            Anuncie seu espaço no Airbnb
+          </MenuItem>
           <MenuItem>Ofereça uma experiência</MenuItem>
           <MenuItem>Ajuda</MenuItem>
+          {user && <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>}
         </MenuList>
       </Menu>
       {/* </Link> */}

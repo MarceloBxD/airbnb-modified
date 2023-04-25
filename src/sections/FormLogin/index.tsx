@@ -3,14 +3,14 @@ import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useApp } from "../../contexts/contextApi";
+import Cookies from "js-cookie";
 
 export default () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false);
 
-  const { setUser }: any = useApp();
+  const { setUser, error, setError }: any = useApp();
 
   const handleLogin = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -30,6 +30,8 @@ export default () => {
         }
       );
       setUser(response.data);
+      console.log(response);
+      Cookies.set("token", response.data, { expires: 999 });
       setRedirect(true);
       setError("");
     } catch (err) {
@@ -77,6 +79,11 @@ export default () => {
           placeholder="Password"
           w="300px"
           maxW="100%"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleLogin(e);
+            }
+          }}
         />
         {error && <Text color="red.600">{error}</Text>}
         <Button

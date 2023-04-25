@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import axios from "axios";
 
 import { ChakraProvider } from "@chakra-ui/react";
-
+import Cookies from "js-cookie";
 import {
   createBrowserRouter,
   RouterProvider,
   Route,
   Link,
+  useParams,
 } from "react-router-dom";
 import FormLogin from "./sections/FormLogin";
 import FormCadaster from "./sections/FormCadaster";
 import Main from "./sections/Main";
 import { AppProvider } from "./contexts/contextApi";
+import PlaceAdd from "./sections/PlaceAdd";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
         path: "/cadaster",
         element: <FormCadaster />,
       },
+      {
+        path: "/place-add",
+        element: <PlaceAdd />,
+      },
+      // {
+      //   path: "/details/:addId",
+      //   element: <MoreDetails />,
+      // },
     ],
   },
 ]);
