@@ -58,6 +58,7 @@ export default () => {
       <Select
         onChange={(e) => setChoose(e.target.value)}
         color="#fff"
+        defaultValue={"A-Z"}
         w="120px"
         borderColor="tomato"
         size="sm"

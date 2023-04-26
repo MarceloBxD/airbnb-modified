@@ -1,20 +1,8 @@
-import {
-  Flex,
-  Text,
-  Image,
-  Button,
-  Select,
-  Input,
-  useToast,
-} from "@chakra-ui/react";
-import NewPlaceForm from "../../components/NewPlaceForm";
-import ImagePlaceForm from "../../components/ImagePlaceForm";
+import { Flex, Text, Image, Button, Select, useToast } from "@chakra-ui/react";
 import Inp from "../../components/Inp";
 import { useState } from "react";
 import PreInput from "../../components/PreInput";
-
 import file from "../../assets/svg/file.svg";
-
 import axios from "axios";
 
 export default () => {
@@ -22,13 +10,11 @@ export default () => {
   const [name, setName] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [category, setCategory] = useState<string>("");
-  const [photoLink, setPhotoLink] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [images, setImages] = useState([]);
+  const [photoLink, setPhotoLink] = useState<string>("");
   const toast = useToast();
-
-  // função para adicionar uma imagem usando um link
 
   const uploadByLink = async () => {
     try {
@@ -56,7 +42,7 @@ export default () => {
       category,
       price,
       description,
-      images,
+      image: images,
     };
 
     try {
@@ -68,14 +54,14 @@ export default () => {
 
       if (response) {
         toast({
-          title: "Place added successfully",
+          title: "Adicionado com Sucesso!",
           status: "success",
           duration: 2000,
           isClosable: true,
         });
       } else {
         toast({
-          title: "Place not added",
+          title: "Houve algum erro ao adicionar o local!",
           status: "error",
           duration: 2000,
           isClosable: true,
@@ -97,7 +83,7 @@ export default () => {
       >
         <PreInput
           placeholder="Name"
-          title="Title"
+          title="Name"
           value={name}
           onChange={(e: any) => setName(e.target.value)}
         />
@@ -109,7 +95,10 @@ export default () => {
         />
         <Flex gap="10px" flexDir="column">
           <Text>Category</Text>
-          <Select onChange={(e: any) => setCategory(e.target.value)}>
+          <Select
+            value={category}
+            onChange={(e: any) => setCategory(e.target.value)}
+          >
             <option value="Restaurant">Restaurant</option>
             <option value="Bar">Bar</option>
             <option value="Hotel">Hotel</option>

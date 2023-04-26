@@ -11,7 +11,7 @@ interface iPreInput {
 export default ({ title, value, onChange, placeholder }: iPreInput) => {
   return (
     <Flex gap="10px" flexDir="column">
-      <Text>{title}</Text>
+      <Text fontWeight="bold">{title}</Text>
       <Inp value={value} onChange={onChange} placeholder={placeholder} />
     </Flex>
   );
