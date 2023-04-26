@@ -2,6 +2,7 @@ import Inp from "../Inp";
 import { Button, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
+import { useApp } from "../../contexts/contextApi";
 
 export default () => {
   const [name, setName] = useState<string>("");
@@ -11,7 +12,15 @@ export default () => {
   const [description, setDescription] = useState<string>("");
   const [image, setImage] = useState<string>("");
 
+  const { isDisabled, setIsDisabled }: any = useApp();
+
   const toast = useToast();
+
+  if (name && address && category && price && description) {
+    setIsDisabled(false);
+  } else {
+    setIsDisabled(true);
+  }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -102,16 +111,16 @@ export default () => {
         placeholder="Descrição"
         mb="10px"
       />
-      <Inp
-        value={image}
-        onChange={(e: any) => setImage(e.target.value)}
-        type="file"
-        size="sm"
-        placeholder="Imagem"
-        border="none"
-        mb="10px"
-      />
-      <Button type="submit" colorScheme="red" w="100%" variant="solid">
+
+      <Button
+        isDisabled={isDisabled}
+        type="submit"
+        colorScheme="red"
+        w="100%"
+        variant="solid"
+        _hover={isDisabled ? {} : { bgColor: "#c53030" }}
+        bgColor={isDisabled ? "#ccc" : "#EE4A44"}
+      >
         Adicionar
       </Button>
     </form>

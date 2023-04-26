@@ -9,6 +9,7 @@ interface iInput {
 export default ({ placeholder, value, onChange, ...props }: any) => {
   return (
     <Input
+      focusBorderColor="#EE4A44"
       placeholder={placeholder}
       onChange={onChange}
       value={value}
