@@ -8,6 +8,7 @@ export function AppProvider({ children }: any) {
   const [searchArea, setSearchArea] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [data, setData] = useState<any>([]);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const getData = async () => {
     const response = await axios.get("http://localhost:3000/places", {
@@ -31,6 +32,8 @@ export function AppProvider({ children }: any) {
     data,
     setData,
     getData,
+    isDisabled,
+    setIsDisabled,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

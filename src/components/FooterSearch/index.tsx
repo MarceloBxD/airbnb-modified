@@ -67,7 +67,7 @@ export default () => {
           <Text>Selecionar...</Text>
         </option>
         <option style={{ color: "#000" }} value="A-Z">
-          <Text>Ordem alfabética</Text>
+          <Text>A-Z</Text>
         </option>
         <option style={{ color: "#000" }} value="menor preço">
           <Text>Menor preço</Text>

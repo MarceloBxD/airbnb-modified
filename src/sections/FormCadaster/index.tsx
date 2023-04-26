@@ -11,7 +11,6 @@ export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   useEffect(() => {
     if (name && email && password) {
@@ -21,7 +20,7 @@ export default () => {
     }
   }, [name, email, password]);
 
-  const { setError, error }: any = useApp();
+  const { setError, error, isDisabled, setIsDisabled }: any = useApp();
 
   const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();

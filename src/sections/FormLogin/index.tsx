@@ -9,8 +9,13 @@ export default () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false);
+  const { setUser, error, setError, isDisabled, setIsDisabled }: any = useApp();
 
-  const { setUser, error, setError }: any = useApp();
+  if (email && password) {
+    setIsDisabled(false);
+  } else {
+    setIsDisabled(true);
+  }
 
   const handleLogin = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -87,11 +92,14 @@ export default () => {
         />
         {error && <Text color="red.600">{error}</Text>}
         <Button
+          isDisabled={isDisabled}
           onClick={(e: any) => handleLogin(e)}
           colorScheme="red"
           w="100%"
           variant="solid"
           mt="10px"
+          _hover={isDisabled ? {} : { bgColor: "#c53030" }}
+          bgColor={isDisabled ? "#ccc" : "#EE4A44"}
         >
           Fazer login
         </Button>
