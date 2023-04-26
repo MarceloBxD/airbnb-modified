@@ -1,6 +1,6 @@
 import { Flex, Input, Button, Text, useToast } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useApp } from "../../contexts/contextApi";
 
 import axios from "axios";
@@ -10,6 +10,16 @@ export default () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (name && email && password) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [name, email, password]);
 
   const { setError, error }: any = useApp();
 
@@ -41,6 +51,9 @@ export default () => {
           isClosable: true,
         });
         setError("");
+        setName("");
+        setEmail("");
+        setPassword("");
       }
     } catch (err) {
       setError(err.response.data.message);
@@ -89,10 +102,11 @@ export default () => {
         />
         <Button
           onClick={(e: any) => handleSubmit(e)}
-          colorScheme="red"
+          _hover={isDisabled ? {} : { bgColor: "#c53030" }}
           w="100%"
-          variant="solid"
+          bgColor={isDisabled ? "#ccc" : "#EE4A44"}
           mt="10px"
+          isDisabled={isDisabled}
         >
           Cadastre-se
         </Button>

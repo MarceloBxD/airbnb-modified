@@ -43,6 +43,7 @@ export default () => {
       }
     );
     setData(response.data.place);
+    setName("");
   };
 
   return (
