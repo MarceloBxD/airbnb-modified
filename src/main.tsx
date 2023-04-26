@@ -18,30 +18,7 @@ import Main from "./sections/Main";
 import { AppProvider } from "./contexts/contextApi";
 import PlaceAdd from "./sections/PlaceAdd";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "/",
-        element: <Main />,
-      },
-      {
-        path: "/login",
-        element: <FormLogin />,
-      },
-      {
-        path: "/cadaster",
-        element: <FormCadaster />,
-      },
-      {
-        path: "/place-add",
-        element: <PlaceAdd />,
-      },
-    ],
-  },
-]);
+import { router } from "./routes/index";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

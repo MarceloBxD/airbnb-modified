@@ -7,15 +7,22 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
+
+// Icons
 import { FaRegPaperPlane } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
-import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearchAlt } from "react-icons/bi";
-import { useApp } from "../../contexts/contextApi";
+
+// Cookies
 import Cookies from "js-cookie";
-import { useState, useEffect } from "react";
+
+// React Router
+import { Link } from "react-router-dom";
+
+import { useApp } from "../../contexts/contextApi";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 
 const handleLogout = () => {
@@ -25,9 +32,8 @@ const handleLogout = () => {
 
 export default () => {
   const navigate = useNavigate();
-  const { setSearchArea, searchArea, user }: any = useApp();
+  const { setSearchArea, searchArea, getData, setData, user }: any = useApp();
   const [name, setName] = useState<string>("");
-  const { setData, getData }: any = useApp();
 
   const searchData = async (name: string) => {
     const response = await axios.post(
