@@ -12,7 +12,6 @@ export default ({ placeholder, value, onChange, ...props }: any) => {
       focusBorderColor="#EE4A44"
       placeholder={placeholder}
       onChange={(e: any) => {
-        console.log(e.target);
         onChange(e.target.value);
       }}
       value={value}

@@ -15,8 +15,6 @@ export default () => {
   const [photoLink, setPhotoLink] = useState<string>("");
   const toast = useToast();
 
-  console.log(name, address, category, price, description, images, photoLink);
-
   const uploadByLink = async () => {
     try {
       const response = await axios.post("/upload-by-link", {
@@ -63,9 +61,16 @@ export default () => {
         });
       }
     } catch (err) {
-      console.log(err);
+      toast({
+        title: err.response.data.message,
+        description: "Faça login para adicionar um local!",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
     }
   };
+  // err.response.data.message;
 
   return (
     <form onSubmit={(e: any) => handleSubmit(e)}>
