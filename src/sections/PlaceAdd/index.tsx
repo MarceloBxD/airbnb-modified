@@ -1,7 +1,6 @@
 import { Flex, Text, Image, Button, Select, useToast } from "@chakra-ui/react";
-import Inp from "../../components/Inp";
+import { Inp, PreInput } from "../../components";
 import { useState } from "react";
-import PreInput from "../../components/PreInput";
 import file from "../../assets/svg/file.svg";
 import axios from "axios";
 

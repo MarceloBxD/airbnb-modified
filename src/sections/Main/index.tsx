@@ -2,7 +2,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useEffect, useState } from "react";
-import { Flex, Select, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
 import { IoStarSharp } from "react-icons/io5";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FaUmbrellaBeach, FaSwimmingPool } from "react-icons/fa";
@@ -13,8 +13,8 @@ import { GiSailboat } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "swiper";
 import { useApp } from "../../contexts/contextApi";
-import axios from "axios";
-import FooterSearch from "../../components/FooterSearch";
+// import axios from "axios";
+import { FooterSearch } from "../../components";
 
 const optionsList = [
   {

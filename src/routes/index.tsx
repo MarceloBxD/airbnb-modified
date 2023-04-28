@@ -1,9 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Main from "../sections/Main";
-import FormLogin from "../sections/FormLogin";
-import FormCadaster from "../sections/FormCadaster";
-import PlaceAdd from "../sections/PlaceAdd";
+import { Main, FormLogin, FormCadaster, PlaceAdd } from "../sections";
 
 export const router = createBrowserRouter([
   {
