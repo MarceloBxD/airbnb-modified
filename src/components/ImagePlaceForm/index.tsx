@@ -13,7 +13,7 @@ export default () => {
 
     const data = {};
 
-    const res = await axios.post("http://localhost:3000/register-place", data, {
+    const res = await axios.post("/register-place", data, {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",

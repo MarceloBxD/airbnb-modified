@@ -17,12 +17,9 @@ export default () => {
 
   const uploadByLink = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/upload-by-link",
-        {
-          link: photoLink,
-        }
-      );
+      const response = await axios.post("/upload-by-link", {
+        link: photoLink,
+      });
       setImages((prev): any => {
         return [...prev, response.data];
       });
@@ -45,10 +42,7 @@ export default () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/register-place",
-        { data }
-      );
+      const response = await axios.post("/register-place", { data });
       console.log(response.data);
 
       if (response) {

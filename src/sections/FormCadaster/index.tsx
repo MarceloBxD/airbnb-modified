@@ -11,7 +11,6 @@ export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   useEffect(() => {
     if (name && email && password) {
       setIsDisabled(false);
@@ -27,7 +26,7 @@ export default () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/register",
+        "/register",
         {
           name,
           email,

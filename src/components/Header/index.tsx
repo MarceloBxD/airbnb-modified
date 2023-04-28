@@ -37,7 +37,7 @@ export default () => {
 
   const searchData = async (name: string) => {
     const response = await axios.post(
-      `http://localhost:3000/place`,
+      `/place`,
       {
         name,
       },
@@ -56,6 +56,7 @@ export default () => {
     <Flex
       justify="space-between"
       align={"center"}
+      gap={{ base: "10px", md: "0px" }}
       w="100%"
       px="20px"
       py="10px"
@@ -70,6 +71,7 @@ export default () => {
         </Flex>
       </Link>
       <Flex
+        display={{ sm: "none", md: "flex" }}
         p="8px"
         borderRadius="15px"
         border="1px solid #fff"
@@ -77,7 +79,7 @@ export default () => {
         gap="30px"
       >
         {!searchArea && (
-          <Flex gap="10px">
+          <Flex display={{ sm: "none", md: "flex" }} gap="10px">
             <Text
               _hover={{ transform: "scale(1.05)" }}
               cursor="pointer"
@@ -108,6 +110,7 @@ export default () => {
         )}
 
         <Flex
+          display={{ sm: "none", lg: "flex" }}
           align="center"
           bgColor="#fff"
           borderRadius="30px"

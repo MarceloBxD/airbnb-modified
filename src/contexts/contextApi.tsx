@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
 const AppContext = createContext({});
@@ -10,8 +10,22 @@ export function AppProvider({ children }: any) {
   const [data, setData] = useState<any>([]);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
+  useEffect(() => {
+    if (!user) {
+      axios.get("/profile");
+    }
+  }, []);
+
+  const breakpoints = {
+    sm: "30em", // 480px
+    md: "48em", // 768px
+    lg: "62em", // 992px
+    xl: "80em", // 1280px
+    "2xl": "96em", // 1536px
+  };
+
   const getData = async () => {
-    const response = await axios.get("http://localhost:3000/places", {
+    const response = await axios.get("/places", {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -34,6 +48,7 @@ export function AppProvider({ children }: any) {
     getData,
     isDisabled,
     setIsDisabled,
+    breakpoints,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

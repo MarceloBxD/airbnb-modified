@@ -1,7 +1,5 @@
-import Header from "./components/Header";
+import { Header } from "./components";
 import { Outlet } from "react-router-dom";
-// import { useEffect } from "react";
-// import Cookies from "js-cookie";
 
 function App() {
   return (

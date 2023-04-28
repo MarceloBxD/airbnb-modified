@@ -11,7 +11,7 @@ export default () => {
     if (choose === "A-Z") {
       try {
         const getDatainOrder = async () => {
-          const res = await axios.get("http://localhost:3000/ordem-alfabetica");
+          const res = await axios.get("/ordem-alfabetica");
           setData(res.data);
         };
         getDatainOrder();
@@ -21,9 +21,7 @@ export default () => {
     } else if (choose === "menor preço") {
       try {
         const getByLowerPrice = async () => {
-          const res = await axios.get(
-            "http://localhost:3000/ordem-menor-preco"
-          );
+          const res = await axios.get("/ordem-menor-preco");
           setData(res.data);
         };
         getByLowerPrice();
@@ -33,9 +31,7 @@ export default () => {
     } else if (choose === "maior preço") {
       try {
         const getByHigherPrice = async () => {
-          const res = await axios.get(
-            "http://localhost:3000/ordem-maior-preco"
-          );
+          const res = await axios.get("/ordem-maior-preco");
           setData(res.data);
         };
         getByHigherPrice();

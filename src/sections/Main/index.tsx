@@ -73,7 +73,13 @@ export default () => {
       w="100%"
       justify="center"
     >
-      <Flex align="center" w="100%" gap="20px" justify="center">
+      <Flex
+        display={{ sm: "none", md: "flex" }}
+        align="center"
+        w="100%"
+        gap="20px"
+        justify="center"
+      >
         <Swiper
           onSwiper={() => setSwiperRef}
           slidesPerView={4}

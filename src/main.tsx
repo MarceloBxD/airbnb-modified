@@ -1,24 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import axios from "axios";
 
 import { ChakraProvider } from "@chakra-ui/react";
-import Cookies from "js-cookie";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
-import FormLogin from "./sections/FormLogin";
-import FormCadaster from "./sections/FormCadaster";
-import Main from "./sections/Main";
+import { RouterProvider } from "react-router-dom";
 import { AppProvider } from "./contexts/contextApi";
-import PlaceAdd from "./sections/PlaceAdd";
-
 import { router } from "./routes/index";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.withCredentials = true;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
