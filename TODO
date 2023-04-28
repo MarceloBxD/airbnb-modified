@@ -2,7 +2,6 @@
 - Organizar os itens pelas suas devidas categorías, colocar um select em vez de input para ela
 - Permanecer com o usuário logado
 - Só deixar o usuário adicionar algum lugar caso ele esteja logado (private)
-- Deixar responsivo
 - Adicionar função de estrelas (rating)
 - Opção de deletar e editar item adicionado (só pra quem adicionou)
 - Fazer as outras páginas (Ofereça uma experiência, Ajuda etc...)

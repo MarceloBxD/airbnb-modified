@@ -10,12 +10,6 @@ export function AppProvider({ children }: any) {
   const [data, setData] = useState<any>([]);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-  useEffect(() => {
-    if (!user) {
-      axios.get("/profile");
-    }
-  }, []);
-
   const breakpoints = {
     sm: "30em", // 480px
     md: "48em", // 768px
@@ -23,6 +17,12 @@ export function AppProvider({ children }: any) {
     xl: "80em", // 1280px
     "2xl": "96em", // 1536px
   };
+
+  useEffect(() => {
+    if (!user) {
+      axios.get("/profile");
+    }
+  }, []);
 
   const getData = async () => {
     const response = await axios.get("/places", {

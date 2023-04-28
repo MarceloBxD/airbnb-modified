@@ -15,6 +15,8 @@ export default () => {
   const [photoLink, setPhotoLink] = useState<string>("");
   const toast = useToast();
 
+  console.log(name, address, category, price, description, images, photoLink);
+
   const uploadByLink = async () => {
     try {
       const response = await axios.post("/upload-by-link", {
@@ -38,7 +40,7 @@ export default () => {
       category,
       price,
       description,
-      image: images,
+      // image: images,
     };
 
     try {
@@ -78,13 +80,13 @@ export default () => {
           placeholder="Name"
           title="Name"
           value={name}
-          onChange={(e: any) => setName(e.target.value)}
+          onChange={setName}
         />
         <PreInput
           placeholder="Address"
           title="Address"
           value={address}
-          onChange={(e: any) => setAddress(e.target.value)}
+          onChange={setAddress}
         />
         <Flex gap="10px" flexDir="column">
           <Text>Category</Text>
@@ -104,19 +106,19 @@ export default () => {
           placeholder="Price"
           title="Price"
           value={price}
-          onChange={(e: any) => setPrice(e.target.value)}
+          onChange={setPrice}
         />
         <PreInput
           title="Description"
           value={description}
-          onChange={(e: any) => setDescription(e.target.value)}
+          onChange={setDescription}
           placeholder="Description"
         />
         <Flex gap="10px" flexDir="column">
           <Text fontWeight="bold">Photos</Text>
           <Inp
             value={photoLink}
-            onChange={(e: any) => setPhotoLink(e.target.value)}
+            onChange={setPhotoLink}
             placeholder="Add using a link..."
           />
           <Button onClick={() => uploadByLink()} w="120px" mt="10px">
