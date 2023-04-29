@@ -1,7 +1,6 @@
 - Adicionar imagens ao Banco de dados, pesquisar alguma biblioteca responsável por isso - B7web
-- Organizar os itens pelas suas devidas categorías, colocar um select em vez de input para ela
 - Permanecer com o usuário logado
-- Só deixar o usuário adicionar algum lugar caso ele esteja logado (private)
+- Só poder adicionar um local com o usuário logado
 - Adicionar função de estrelas (rating)
 - Opção de deletar e editar item adicionado (só pra quem adicionou)
 - Fazer as outras páginas (Ofereça uma experiência, Ajuda etc...)
