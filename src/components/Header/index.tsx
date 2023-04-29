@@ -71,7 +71,7 @@ export default () => {
         </Flex>
       </Link>
       <Flex
-        display={{ sm: "none", md: "flex" }}
+        display={{ base: "none", md: "flex" }}
         p="8px"
         borderRadius="15px"
         border="1px solid #fff"
@@ -88,8 +88,20 @@ export default () => {
             >
               Qualquer lugar
             </Text>
-            <Text fontWeight="500">Praia</Text>
-            <Text fontWeight="500">Lugar</Text>
+            <Text
+              _hover={{ transform: "scale(1.05)" }}
+              cursor="pointer"
+              fontWeight="500"
+            >
+              Praia
+            </Text>
+            <Text
+              _hover={{ transform: "scale(1.05)" }}
+              cursor="pointer"
+              fontWeight="500"
+            >
+              Lugar
+            </Text>
           </Flex>
         )}
         {searchArea && (

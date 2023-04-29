@@ -20,7 +20,8 @@ export function AppProvider({ children }: any) {
 
   useEffect(() => {
     if (!user) {
-      axios.get("/profile");
+      const { data }: any = axios.get("/profile");
+      setUser(data);
     }
   }, []);
 

@@ -60,17 +60,15 @@ export default () => {
         size="sm"
         variant="unstyled"
       >
-        <option disabled selected value="">
-          <Text>Selecionar...</Text>
-        </option>
+        <option disabled>Selecionar...</option>
         <option style={{ color: "#000" }} value="A-Z">
-          <Text>A-Z</Text>
+          A-Z
         </option>
         <option style={{ color: "#000" }} value="menor preço">
-          <Text>Menor preço</Text>
+          Menor preço
         </option>
         <option style={{ color: "#000" }} value="maior preço">
-          <Text>Maior preço</Text>
+          Maior preço
         </option>
       </Select>
     </Flex>

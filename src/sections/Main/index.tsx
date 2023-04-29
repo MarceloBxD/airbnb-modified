@@ -74,7 +74,7 @@ export default () => {
       justify="center"
     >
       <Flex
-        display={{ sm: "none", md: "flex" }}
+        display={{ base: "none", md: "flex" }}
         align="center"
         w="100%"
         gap="20px"

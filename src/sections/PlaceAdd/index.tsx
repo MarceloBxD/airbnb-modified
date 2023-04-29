@@ -1,4 +1,12 @@
-import { Flex, Text, Image, Button, Select, useToast } from "@chakra-ui/react";
+import {
+  Flex,
+  Input,
+  Text,
+  Image,
+  Button,
+  Select,
+  useToast,
+} from "@chakra-ui/react";
 import { Inp, PreInput } from "../../components";
 import { useState } from "react";
 import file from "../../assets/svg/file.svg";
@@ -29,6 +37,23 @@ export default () => {
     }
   };
 
+  const uploadPhotos = async (e: any) => {
+    const files = e.target.files;
+    const data = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      data.append("photos", files[i]);
+    }
+    let response = await axios.post("/uploads", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    setImages((prev): any => {
+      return [...prev, ...response.data];
+    });
+    console.log(response.data);
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -42,7 +67,7 @@ export default () => {
     };
 
     try {
-      const response = await axios.post("/register-place", { data });
+      const response = await axios.post("/register-place", data);
       console.log(response.data);
 
       if (response) {
@@ -52,6 +77,12 @@ export default () => {
           duration: 2000,
           isClosable: true,
         });
+        setName("");
+        setAddress("");
+        setCategory("");
+        setPrice("");
+        setDescription("");
+        setImages([]);
       } else {
         toast({
           title: "Houve algum erro ao adicionar o local!",
@@ -63,7 +94,6 @@ export default () => {
     } catch (err) {
       toast({
         title: err.response.data.message,
-        description: "Faça login para adicionar um local!",
         status: "error",
         duration: 2000,
         isClosable: true,
@@ -75,26 +105,27 @@ export default () => {
   return (
     <form onSubmit={(e: any) => handleSubmit(e)}>
       <Flex
+        p="10px"
         gap="15px"
         flexDir={"column"}
         my="20px"
-        h="calc(100vh - 62px)"
+        h="auto"
         mx="100px"
       >
         <PreInput
-          placeholder="Name"
-          title="Name"
+          placeholder="Casa 2 - 2º Andar (Itaperuna)"
+          title="Nome do local"
           value={name}
           onChange={setName}
         />
         <PreInput
-          placeholder="Address"
-          title="Address"
+          placeholder="Rua Jornalista Henrique Cordeiro, 200 - Centro"
+          title="Endereço"
           value={address}
           onChange={setAddress}
         />
         <Flex gap="10px" flexDir="column">
-          <Text>Category</Text>
+          <Text fontWeight="bold">Category</Text>
           <Select
             value={category}
             onChange={(e: any) => setCategory(e.target.value)}
@@ -102,43 +133,43 @@ export default () => {
             <option value="Restaurant">Restaurant</option>
             <option value="Bar">Bar</option>
             <option value="Hotel">Hotel</option>
-            <option value="Museum">Museum</option>
+            <option selected value="Museum">
+              Museum
+            </option>
             <option value="Park">Park</option>
             <option value="Other">Other</option>
           </Select>
         </Flex>
         <PreInput
-          placeholder="Price"
-          title="Price"
+          placeholder="200"
+          title="Preço p/ noite"
           value={price}
           onChange={setPrice}
         />
         <PreInput
-          title="Description"
+          title="Descrição"
           value={description}
           onChange={setDescription}
           placeholder="Description"
         />
         <Flex gap="10px" flexDir="column">
-          <Text fontWeight="bold">Photos</Text>
+          <Text fontWeight="bold">Fotos</Text>
           <Inp
             value={photoLink}
             onChange={setPhotoLink}
-            placeholder="Add using a link..."
+            placeholder="Adicione uma ou mais fotos do local com um link"
           />
           <Button onClick={() => uploadByLink()} w="120px" mt="10px">
             Add Photo
           </Button>
         </Flex>
-        <Button w="200px" size="md" gap="5px" variant="outline">
-          <Image w="20px" src={file} />
-          <Text fontSize="12px">Upload</Text>
-        </Button>
-        {images.length > 0 &&
-          images.map((link: string) => (
-            <div>
+
+        <Flex flexWrap="wrap" w="100%" gap="10px">
+          {images.length > 0 &&
+            images.map((link: string, index) => (
               <Image
                 rounded="md"
+                key={index}
                 w="350px"
                 h="200px"
                 objectFit="cover"
@@ -147,9 +178,26 @@ export default () => {
                 src={"http://localhost:3000/uploads/" + link}
                 alt="Place image"
               />
-            </div>
-          ))}
-        <Button type="submit" bgColor="#EE4A44" variant={"unstyled"}>
+            ))}
+        </Flex>
+        <label
+          style={{
+            display: "flex",
+            gap: "10px",
+            borderRadius: "8px",
+            padding: "10px",
+            border: "1px solid #000",
+            cursor: "pointer",
+            width: "120px",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Input multiple onChange={uploadPhotos} type="file" hidden />
+          <Image w="20px" src={file} />
+          <Text fontSize="12px">Upload</Text>
+        </label>
+        <Button type="submit" bgColor="#EE4A44" p="10px" variant={"unstyled"}>
           <Text color="#fff">Enviar</Text>
         </Button>
       </Flex>

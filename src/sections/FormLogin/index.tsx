@@ -35,7 +35,7 @@ export default () => {
         }
       );
       setUser(response.data);
-      console.log(response);
+      // console.log(response);
       Cookies.set("token", response.data, { expires: 999 });
       setRedirect(true);
       setError("");
