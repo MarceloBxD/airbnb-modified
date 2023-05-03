@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Navigation } from "swiper";
 import { useApp } from "../../contexts/contextApi";
 import { FiArrowRight } from "react-icons/fi";
+import { FooterSearch } from "../../components";
 
 const optionsList = [
   {
@@ -221,44 +222,8 @@ export default () => {
             </Flex>
           </Grid>
         ))}
+        <FooterSearch />
       </Flex>
     </Flex>
   );
 };
-
-// <Flex
-//   w="33.33%"
-//   key={item.placeid}
-//   cursor="Pointer"
-//   flexDir="column"
-//   p="5px 10px"
-// >
-//   <Image
-//     objectFit="cover"
-//     backgroundPosition="center"
-//     backgroundSize="cover"
-//     w="360px"
-//     h="340px"
-//     borderRadius="15px"
-//     alt="image"
-//   />
-//   <Flex justify="space-between">
-//     <Flex flexDir="column">
-//       <Text fontWeight="bold">{item.name}</Text>
-//       <Text>{item.description}</Text>
-//       <Text color="#000" fontWeight="600">
-//         R$ {item.price},00 /noite
-//       </Text>
-//       <Text color="#aaa">{item.location}</Text>
-//     </Flex>
-//     <Flex gap="4px" h="fit-content" align="center">
-//       <Text align="center">{item.stars}</Text>
-//       <IoStarSharp
-//         style={{
-//           alignSelf: "center",
-//           justifyContent: "center",
-//         }}
-//       />
-//     </Flex>
-//   </Flex>
-// </Flex>

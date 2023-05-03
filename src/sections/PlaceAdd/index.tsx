@@ -51,7 +51,6 @@ export default () => {
     setImages((prev): any => {
       return [...prev, ...response.data];
     });
-    console.log(response.data);
   };
 
   const handleSubmit = async (e: any) => {
@@ -68,7 +67,6 @@ export default () => {
 
     try {
       const response = await axios.post("/register-place", data);
-      console.log(response.data);
 
       if (response) {
         toast({

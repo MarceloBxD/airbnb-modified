@@ -1,4 +1,4 @@
-import { Flex, Text, Select } from "@chakra-ui/react";
+import { Flex, Select } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useApp } from "../../contexts/contextApi";
