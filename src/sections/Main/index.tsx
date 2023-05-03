@@ -2,8 +2,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useEffect, useState } from "react";
-import { Flex, Image, Text } from "@chakra-ui/react";
-import { IoStarSharp } from "react-icons/io5";
+import { Flex, Image, Text, Grid } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FaUmbrellaBeach, FaSwimmingPool } from "react-icons/fa";
 import { FiCoffee } from "react-icons/fi";
@@ -13,8 +12,7 @@ import { GiSailboat } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "swiper";
 import { useApp } from "../../contexts/contextApi";
-// import axios from "axios";
-import { FooterSearch } from "../../components";
+import { FiArrowRight } from "react-icons/fi";
 
 const optionsList = [
   {
@@ -178,12 +176,13 @@ export default () => {
         </Swiper>
       </Flex>
 
-      <Flex maxW="1200px" m="0 auto" flexWrap="wrap">
+      <Flex maxW="1200px" justify="center" m="0 auto" flexWrap="wrap">
         {data.map((item: any) => (
-          <Flex
+          <Grid
+            templateColumns={"auto"}
             w="33.33%"
-            onClick={() => console.log(item.placeid)}
-            key={item.placeid}
+            m="20px 50px"
+            key={item._id}
             cursor="Pointer"
             flexDir="column"
             p="5px 10px"
@@ -206,20 +205,60 @@ export default () => {
                 </Text>
                 <Text color="#aaa">{item.location}</Text>
               </Flex>
-              <Flex gap="4px" h="fit-content" align="center">
-                <Text align="center">{item.stars}</Text>
-                <IoStarSharp
-                  style={{
-                    alignSelf: "center",
-                    justifyContent: "center",
-                  }}
-                />
+              <Flex
+                onClick={() => navigate(`/place/${item.placeid}`)}
+                cursor="pointer"
+                align="center"
+                justify="center"
+                borderRadius="50%"
+                w="50px"
+                h="50px"
+                bg="#000"
+                color="#fff"
+              >
+                <FiArrowRight />
               </Flex>
             </Flex>
-          </Flex>
+          </Grid>
         ))}
       </Flex>
-      <FooterSearch />
     </Flex>
   );
 };
+
+// <Flex
+//   w="33.33%"
+//   key={item.placeid}
+//   cursor="Pointer"
+//   flexDir="column"
+//   p="5px 10px"
+// >
+//   <Image
+//     objectFit="cover"
+//     backgroundPosition="center"
+//     backgroundSize="cover"
+//     w="360px"
+//     h="340px"
+//     borderRadius="15px"
+//     alt="image"
+//   />
+//   <Flex justify="space-between">
+//     <Flex flexDir="column">
+//       <Text fontWeight="bold">{item.name}</Text>
+//       <Text>{item.description}</Text>
+//       <Text color="#000" fontWeight="600">
+//         R$ {item.price},00 /noite
+//       </Text>
+//       <Text color="#aaa">{item.location}</Text>
+//     </Flex>
+//     <Flex gap="4px" h="fit-content" align="center">
+//       <Text align="center">{item.stars}</Text>
+//       <IoStarSharp
+//         style={{
+//           alignSelf: "center",
+//           justifyContent: "center",
+//         }}
+//       />
+//     </Flex>
+//   </Flex>
+// </Flex>

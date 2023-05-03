@@ -63,7 +63,7 @@ export default () => {
       category,
       price,
       description,
-      // image: images,
+      image: images,
     };
 
     try {

@@ -35,12 +35,10 @@ export default () => {
         }
       );
       setUser(response.data);
-      // console.log(response);
       Cookies.set("token", response.data, { expires: 999 });
       setRedirect(true);
       setError("");
     } catch (err) {
-      // console.log(err.response.data);
       if (err.response.data === "User not found") {
         setError("Usuário não encontrado");
       } else if (err.response.data === "Pass not ok") {
