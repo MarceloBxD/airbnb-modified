@@ -23,7 +23,6 @@ export function AppProvider({ children }: any) {
     const verifyUser = async () => {
       const { data } = await axios.get("/profile");
       setUser(data);
-      // setWelcomeModalOpen(true);
     };
     verifyUser();
   }, []);

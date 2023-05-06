@@ -106,9 +106,8 @@ export default () => {
         p="10px"
         gap="15px"
         flexDir={"column"}
-        my="20px"
-        h="auto"
-        mx="100px"
+        my={{ base: "20px", md: "50px" }}
+        mx={{ base: "20px", md: "50px" }}
       >
         <PreInput
           placeholder="Casa 2 - 2º Andar (Itaperuna)"

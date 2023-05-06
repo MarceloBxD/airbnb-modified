@@ -1,19 +1,9 @@
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { useEffect, useState } from "react";
 import { Flex, Image, Text, Grid } from "@chakra-ui/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FaUmbrellaBeach, FaSwimmingPool } from "react-icons/fa";
-import { FiCoffee } from "react-icons/fi";
-import { SiLinuxcontainers } from "react-icons/si";
-import { AiOutlineFire } from "react-icons/ai";
-import { GiSailboat } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
-import { Navigation } from "swiper";
 import { useApp } from "../../contexts/contextApi";
 import { FiArrowRight } from "react-icons/fi";
-import { FooterSearch } from "../../components";
+import { FooterSearch, Swiper } from "../../components";
 
 const optionsList = [
   {
@@ -55,7 +45,6 @@ const optionsList = [
 ];
 
 export default () => {
-  const [swiperRef, setSwiperRef] = useState(null);
   const navigate = useNavigate();
   const { data, getData }: any = useApp();
 
@@ -67,117 +56,13 @@ export default () => {
     <Flex
       align="center"
       flexWrap="wrap"
-      px="30px"
       gap="30px"
       py="20px"
+      px="20px"
       w="100%"
       justify="center"
     >
-      <Flex
-        display={{ base: "none", md: "flex" }}
-        align="center"
-        w="100%"
-        gap="20px"
-        justify="center"
-      >
-        <Swiper
-          onSwiper={() => setSwiperRef}
-          slidesPerView={4}
-          spaceBetween={10}
-          pagination={{
-            type: "fraction",
-          }}
-          navigation={true}
-          modules={[Navigation]}
-          className="mySwiper"
-        >
-          <SwiperSlide>
-            <Flex
-              _hover={{
-                fontWeight: "bold",
-                transition: "all 0.2s ease-in-out",
-              }}
-              justify="center"
-              align="center"
-              flexDir="column"
-            >
-              <FaUmbrellaBeach />
-              <Text>Praia</Text>
-            </Flex>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Flex
-              _hover={{
-                fontWeight: "bold",
-                transition: "all 0.2s ease-in-out",
-              }}
-              justify="center"
-              align="center"
-              flexDir="column"
-            >
-              <FaSwimmingPool />
-              <Text>Piscina</Text>
-            </Flex>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Flex
-              _hover={{
-                fontWeight: "bold",
-                transition: "all 0.2s ease-in-out",
-              }}
-              justify="center"
-              align="center"
-              flexDir="column"
-            >
-              <FiCoffee />
-              <Text>Pousada</Text>
-            </Flex>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Flex
-              _hover={{
-                fontWeight: "bold",
-                transition: "all 0.2s ease-in-out",
-              }}
-              justify="center"
-              align="center"
-              flexDir="column"
-            >
-              <SiLinuxcontainers />
-              <Text>Containeres</Text>
-            </Flex>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Flex
-              _hover={{
-                fontWeight: "bold",
-                transition: "all 0.2s ease-in-out",
-              }}
-              justify="center"
-              align="center"
-              flexDir="column"
-            >
-              <AiOutlineFire />
-              <Text>Em alta</Text>
-            </Flex>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Flex
-              _hover={{
-                fontWeight: "bold",
-                transition: "all 0.2s ease-in-out",
-              }}
-              justify="center"
-              align="center"
-              flexDir="column"
-            >
-              <GiSailboat />
-              <Text>Barcos</Text>
-            </Flex>
-          </SwiperSlide>
-        </Swiper>
-      </Flex>
-
+      <Swiper />
       <Flex
         maxW="100vw"
         w="100%"
@@ -187,7 +72,8 @@ export default () => {
       >
         {data.map((item: any) => (
           <Grid
-            templateColumns={"auto"}
+            display="flex"
+            justifyContent={{ base: "center", md: "space-between" }}
             w={{ base: "100%", md: "360px" }}
             m={{ base: "20px", md: "15px" }}
             key={item._id}

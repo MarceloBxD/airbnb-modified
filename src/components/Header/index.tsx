@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Flex,
   Input,
   Menu,
@@ -39,6 +40,21 @@ export default () => {
   //   return <Navigate to={redirectToLogin} />;
   // }
 
+  const placesType = [
+    {
+      id: 1,
+      name: "Praia",
+    },
+    {
+      id: 2,
+      name: "Hotel",
+    },
+    {
+      id: 3,
+      name: "Casa",
+    },
+  ];
+
   const searchData = async (name: string) => {
     const response = await axios.post(
       `/place`,
@@ -76,25 +92,27 @@ export default () => {
       </Link>
       <Flex
         display={{ base: "none", md: "flex" }}
-        p="8px"
+        p="10px"
         borderRadius="15px"
-        border="1px solid #fff"
+        border="2px solid #fff"
         color="#FFF"
         gap="30px"
       >
-        {!searchArea && (
-          <Flex display={{ sm: "none", md: "flex" }} gap="10px">
-            <Text cursor="pointer" fontWeight="500" onClick={() => getData()}>
-              Qualquer lugar
+        {!searchArea &&
+          placesType.map((place: any) => (
+            // <Link to={`/place/${place.name}`}>
+            <Text
+              _hover={{
+                cursor: "pointer",
+                transform: "scale(1.1)",
+                transition: "all 0.3s ease",
+              }}
+              fontWeight="600"
+            >
+              {place.name}
             </Text>
-            <Text cursor="pointer" fontWeight="500">
-              Praia
-            </Text>
-            <Text cursor="pointer" fontWeight="500">
-              Lugar
-            </Text>
-          </Flex>
-        )}
+            // </Link>
+          ))}
         {searchArea && (
           <Input
             value={name}
@@ -115,14 +133,13 @@ export default () => {
         <Flex
           display={{ sm: "none", lg: "flex" }}
           align="center"
-          bgColor="#fff"
           borderRadius="30px"
           w="40px"
           cursor="pointer"
           justify="center"
           onClick={() => setSearchArea(true)}
         >
-          <BiSearchAlt color="#000" />
+          <BiSearchAlt size="20px" color="#fff" />
         </Flex>
       </Flex>
       <Menu>
@@ -143,7 +160,7 @@ export default () => {
             borderRadius="20px"
           >
             <RxHamburgerMenu size={"1.2em"} color="#fff" />
-            {!!user && <Text color="#fff">{user.name}</Text>}
+            {!!user && <Avatar size="xs" src={user.avatar} />}
           </Flex>
         </MenuButton>
         <MenuList zIndex={999}>
