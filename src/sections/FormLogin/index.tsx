@@ -9,7 +9,8 @@ export default () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false);
-  const { setUser, error, setError, isDisabled, setIsDisabled }: any = useApp();
+  const { setUser, error, user, setError, isDisabled, setIsDisabled }: any =
+    useApp();
 
   if (email && password) {
     setIsDisabled(false);
@@ -21,7 +22,7 @@ export default () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/login",
         {
           email,
@@ -34,8 +35,8 @@ export default () => {
           },
         }
       );
-      setUser(response.data);
-      Cookies.set("token", response.data, { expires: 999 });
+      setUser(data);
+      console.log(user);
       setRedirect(true);
       setError("");
     } catch (err) {

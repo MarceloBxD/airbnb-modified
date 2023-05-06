@@ -152,20 +152,7 @@ export default () => {
             borderRadius="20px"
           >
             <RxHamburgerMenu size={"1.2em"} color="#fff" />
-            {user ? (
-              <Flex
-                w="25px"
-                h="25px"
-                align="center"
-                bgColor="#000"
-                justify="center"
-                rounded="full"
-              >
-                <Text color="#fff">{user.name[0]}</Text>
-              </Flex>
-            ) : (
-              <FiUser size={"1.5em"} color="#FFF" />
-            )}
+            {!!user && <div>{user.name}</div>}
           </Flex>
         </MenuButton>
         <MenuList zIndex={999}>

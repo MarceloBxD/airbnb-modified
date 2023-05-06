@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
 const AppContext = createContext({});
@@ -19,10 +19,11 @@ export function AppProvider({ children }: any) {
   };
 
   useEffect(() => {
-    if (!user) {
-      const { data }: any = axios.get("/profile");
+    const verifyUser = async () => {
+      const { data } = await axios.get("/profile");
       setUser(data);
-    }
+    };
+    verifyUser();
   }, []);
 
   const getData = async () => {
