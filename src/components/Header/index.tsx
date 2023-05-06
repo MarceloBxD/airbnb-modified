@@ -14,26 +14,30 @@ import { FiUser } from "react-icons/fi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearchAlt } from "react-icons/bi";
 
-// Cookies
-import Cookies from "js-cookie";
-
 // React Router
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
-import { useApp } from "../../contexts/contextApi";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
-
-const handleLogout = () => {
-  Cookies.remove("user");
-  window.location.href = "/";
-};
+import { useApp } from "../../contexts/contextApi";
+import { useState } from "react";
 
 export default () => {
   const navigate = useNavigate();
   const { setSearchArea, searchArea, getData, setData, user }: any = useApp();
   const [name, setName] = useState<string>("");
+  const [redirectToLogin, setRedirectToLogin] = useState<any>("");
+
+  const handleLogout = async () => {
+    const response = await axios.post("/logout");
+    console.log(response.data);
+    // if (response) {
+    //   setRedirectToLogin("/login");
+    // }
+  };
+
+  // if (redirectToLogin) {
+  //   return <Navigate to={redirectToLogin} />;
+  // }
 
   const searchData = async (name: string) => {
     const response = await axios.post(
@@ -80,26 +84,13 @@ export default () => {
       >
         {!searchArea && (
           <Flex display={{ sm: "none", md: "flex" }} gap="10px">
-            <Text
-              _hover={{ transform: "scale(1.05)" }}
-              cursor="pointer"
-              fontWeight="500"
-              onClick={() => getData()}
-            >
+            <Text cursor="pointer" fontWeight="500" onClick={() => getData()}>
               Qualquer lugar
             </Text>
-            <Text
-              _hover={{ transform: "scale(1.05)" }}
-              cursor="pointer"
-              fontWeight="500"
-            >
+            <Text cursor="pointer" fontWeight="500">
               Praia
             </Text>
-            <Text
-              _hover={{ transform: "scale(1.05)" }}
-              cursor="pointer"
-              fontWeight="500"
-            >
+            <Text cursor="pointer" fontWeight="500">
               Lugar
             </Text>
           </Flex>
@@ -142,8 +133,8 @@ export default () => {
               boxShadow: "0px 0px 4px 0px #000",
               transition: "all 0.3s ease",
             }}
-            justify="space-between"
             align="center"
+            justify="center"
             px="8px"
             gap="5px"
             w="fit-content"
@@ -152,7 +143,7 @@ export default () => {
             borderRadius="20px"
           >
             <RxHamburgerMenu size={"1.2em"} color="#fff" />
-            {!!user && <div>{user.name}</div>}
+            {!!user && <Text color="#fff">{user.name}</Text>}
           </Flex>
         </MenuButton>
         <MenuList zIndex={999}>

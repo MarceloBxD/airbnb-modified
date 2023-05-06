@@ -6,3 +6,4 @@ export { default as Modal } from "./Modal";
 // export { default as ModelDetail } from './ModelDetail';
 export { default as NewPlaceForm } from "./NewPlaceForm";
 export { default as PreInput } from "./PreInput";
+export { default as WelcomeModal } from "./WelcomeModal";

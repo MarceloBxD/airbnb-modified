@@ -9,6 +9,7 @@ export function AppProvider({ children }: any) {
   const [error, setError] = useState<string>("");
   const [data, setData] = useState<any>([]);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [welcomeModalOpen, setWelcomeModalOpen] = useState<boolean>(false);
 
   const breakpoints = {
     sm: "30em", // 480px
@@ -22,6 +23,7 @@ export function AppProvider({ children }: any) {
     const verifyUser = async () => {
       const { data } = await axios.get("/profile");
       setUser(data);
+      // setWelcomeModalOpen(true);
     };
     verifyUser();
   }, []);
@@ -51,6 +53,8 @@ export function AppProvider({ children }: any) {
     isDisabled,
     setIsDisabled,
     breakpoints,
+    welcomeModalOpen,
+    setWelcomeModalOpen,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

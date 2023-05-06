@@ -57,7 +57,7 @@ const optionsList = [
 export default () => {
   const [swiperRef, setSwiperRef] = useState(null);
   const navigate = useNavigate();
-  const { data, setData, getData }: any = useApp();
+  const { data, getData }: any = useApp();
 
   useEffect(() => {
     getData();
@@ -65,6 +65,7 @@ export default () => {
 
   return (
     <Flex
+      align="center"
       flexWrap="wrap"
       px="30px"
       gap="30px"
@@ -177,16 +178,21 @@ export default () => {
         </Swiper>
       </Flex>
 
-      <Flex maxW="1200px" justify="center" m="0 auto" flexWrap="wrap">
+      <Flex
+        maxW="100vw"
+        w="100%"
+        justify="center"
+        align="center"
+        flexWrap="wrap"
+      >
         {data.map((item: any) => (
           <Grid
             templateColumns={"auto"}
-            w="33.33%"
-            m="20px 50px"
+            w={{ base: "100%", md: "360px" }}
+            m={{ base: "20px", md: "15px" }}
             key={item._id}
             cursor="Pointer"
             flexDir="column"
-            p="5px 10px"
           >
             <Image
               objectFit="cover"
@@ -207,7 +213,7 @@ export default () => {
                 <Text color="#aaa">{item.location}</Text>
               </Flex>
               <Flex
-                onClick={() => navigate(`/place/${item.placeid}`)}
+                // onClick={() => navigate(`/place/${item.placeid}`)}
                 cursor="pointer"
                 align="center"
                 justify="center"
@@ -215,6 +221,7 @@ export default () => {
                 w="50px"
                 h="50px"
                 bg="#000"
+                display={{ base: "none", md: "flex" }}
                 color="#fff"
               >
                 <FiArrowRight />
