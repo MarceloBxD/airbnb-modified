@@ -179,7 +179,7 @@ export default () => {
             Anuncie seu espaço no Airbnb
           </MenuItem>
           <MenuItem>Ofereça uma experiência</MenuItem>
-          <MenuItem>Ajuda</MenuItem>
+          <MenuItem onClick={() => navigate("/help")}>Ajuda</MenuItem>
           {user && <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>}
         </MenuList>
       </Menu>

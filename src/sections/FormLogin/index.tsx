@@ -9,14 +9,7 @@ export default () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false);
-  const {
-    setUser,
-    error,
-    setWelcomeModalOpen,
-    setError,
-    isDisabled,
-    setIsDisabled,
-  }: any = useApp();
+  const { setUser, error, setError, isDisabled, setIsDisabled }: any = useApp();
 
   if (email && password) {
     setIsDisabled(false);
@@ -42,7 +35,6 @@ export default () => {
         }
       );
       setUser(data);
-      setWelcomeModalOpen(true);
       setRedirect(true);
       setError("");
     } catch (err) {
